@@ -1,0 +1,10 @@
+{% extends 'comercial/base.html.twig' %}
+
+{% block option %}
+    <h1>Editar Perfil</h1>
+
+    {{ include('comercial/_usuario_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('comercial_presupuesto_index') }}">Volver</a>
+
+{% endblock %}

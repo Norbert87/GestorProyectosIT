@@ -1,0 +1,30 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Caracteristica</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ caracteristica.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ caracteristica.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Preciobase</th>
+                <td>{{ caracteristica.preciobase }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ caracteristica.activo ? 'Si' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_carateristicas_index') }}">Volver</a>
+
+{% endblock %}

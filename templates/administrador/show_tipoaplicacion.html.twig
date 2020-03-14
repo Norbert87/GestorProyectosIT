@@ -1,0 +1,29 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Tipo Aplicacion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tipo_aplicacion.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ tipo_aplicacion.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Precio base</th>
+                <td>{{ tipo_aplicacion.preciobase }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ tipo_aplicacion.activo ? 'Si' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_carateristicas_index') }}">Volver</a>
+{% endblock %}

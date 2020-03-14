@@ -1,0 +1,42 @@
+{% extends 'tecnico/base.html.twig' %}
+{% block option %}
+    <h3>Tareas</h3>
+    <br>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripcion</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tarea in tareas %}
+            <tr>
+                <td>{{ tarea.id }}</td>
+                <td>{{ tarea.descripcionCorta }}</td>
+                <td>{{ tarea.estado }}</td>
+                <td>
+                    <a href="{{ path('tecnico_tarea_show', {'id': app.request.get('id'),'idtarea':tarea.id}) }}">Ver Tarea</a>
+                    {% if workflow_can(tarea,'terminar') %}
+                    <a href="{{ path('tecnico_tarea_terminar', {'id': app.request.get('id'),'idtarea':tarea.id}) }}">Terminar Tarea</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay tareas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('tecnico_proyectos_index') }}">Volver</a>
+{% endblock %}

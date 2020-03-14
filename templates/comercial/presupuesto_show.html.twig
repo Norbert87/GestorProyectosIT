@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presupuesto{% endblock %}
+
+{% block body %}
+    <h1>Presupuesto</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ presupuesto.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ presupuesto.nombre }}</td>
+            </tr>
+            <tr>
+                <th>FechaSolicitud</th>
+                <td>{{ presupuesto.fechaSolicitud ? presupuesto.fechaSolicitud|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaEntrega</th>
+                <td>{{ presupuesto.fechaEntrega ? presupuesto.fechaEntrega|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ presupuesto.email }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ presupuesto.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Otras</th>
+                <td>{{ presupuesto.otras }}</td>
+            </tr>
+            <tr>
+                <th>Preciofinal</th>
+                <td>{{ presupuesto.preciofinal }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ presupuesto.estado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('comercial_presupuesto_index') }}">Volver</a>
+
+{% endblock %}

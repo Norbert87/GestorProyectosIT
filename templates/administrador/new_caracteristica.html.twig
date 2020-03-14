@@ -1,0 +1,10 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Nueva caracteristica</h1>
+
+    {{ include('administrador/_caracteristica_form.html.twig') }}
+
+    <a href="{{ path('admin_carateristicas_index') }}">Volver</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'email/base.html.twig' %}
+{% block bodyemail %}
+    <h1>{{  'Tarea asignada '|trans({}, 'email', locale)}}</h1>
+    <h5>{{ 'Tarea:'|trans({}, 'email', locale)}}</h5>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>{{ 'Proyecto Id'|trans({}, 'email', locale)}}</th>
+            <td>{{ tarea.proyecto.id }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Id'|trans({}, 'email', locale)}}</th>
+            <td>{{ tarea.id }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Descripcion'|trans({}, 'email', locale)}}</th>
+            <td>{{ tarea.descripcionCorta }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

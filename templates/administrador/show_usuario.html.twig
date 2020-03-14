@@ -1,0 +1,34 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Usuario</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ usuario.id }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ usuario.active?'si':'No' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ usuario.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Idioma</th>
+                <td>{{ usuario.locale }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_usuarios_index') }}">Volver</a>
+
+{% endblock %}

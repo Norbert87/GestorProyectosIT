@@ -1,0 +1,10 @@
+{% extends 'tecnico/base.html.twig' %}
+
+{% block option %}
+    <h1>Editar Perfil</h1>
+
+    {{ include('tecnico/_usuario_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('tecnico_proyectos_index') }}">Volver</a>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'jefeproyecto/base.html.twig' %}
+
+{% block title %}Nueva Tarea{% endblock %}
+
+{% block option %}
+    <h3>Nueva Tarea</h3>
+
+    {{ include('jefeproyecto/_form_tarea.html.twig') }}
+
+    <a href="{{ path('jefeproyecto_tareas',{'id': app.request.get('id')}) }}">Volver</a>
+{% endblock %}

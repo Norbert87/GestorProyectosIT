@@ -1,0 +1,58 @@
+{% extends 'email/base.html.twig' %}
+{% block bodyemail %}
+    <h1>{{  'Resumen'|trans({}, 'email', locale)}} id: {{ presupuesto.id }}</h1>
+    <table class="table">
+        {% for pre_tipo_aplicacion in presupuesto.tipoaplicacion %}
+            <tr>
+                {% if locale!='es' %}
+                    {% for trad in  pre_tipo_aplicacion.traducciones %}
+                        {% if trad.locale == locale %}
+                            <th><b>{{ trad.nombre }}</b></th>
+                        {% endif %}
+                    {% else %}
+                        <th><b>{{ pre_tipo_aplicacion.nombre }}</b></th>
+                    {% endfor %}
+                {% else %}
+                    <th><b>{{ pre_tipo_aplicacion.nombre }}</b></th>
+                {% endif %}
+                <th><b>{{ pre_tipo_aplicacion.preciobase }} €</b></th>
+            </tr>
+            {% for pre_caracteristica in presupuesto.caracteristica %}
+                <tr>
+                    {% if pre_caracteristica.tipoaplicacion.id == pre_tipo_aplicacion.id %}
+                        {% if locale!='es' %}
+                            {% for trad in  pre_caracteristica.traducciones %}
+                                {% if trad.locale == locale %}
+                                    <td>{{ trad.nombre }}</td>
+                                {% endif %}
+                            {% else %}
+                                <td>{{ pre_caracteristica.nombre }}</td>
+                            {% endfor %}
+                        {% else %}
+                            <td>{{ pre_caracteristica.nombre }}</td>
+                        {% endif %}
+                        <td>+ {{ pre_caracteristica.preciobase }} €</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <br><br>
+    {% if presupuesto.otras %}
+        <table>
+            <tr>
+                <td>{{ 'Otras:'|trans({}, 'email', locale)}} {{ presupuesto.otras }}</td>
+            </tr>
+        </table>
+    {% endif %}
+    <br><br>
+    <h3>{{ 'Total:'|trans({}, 'email', locale)}} {{ total }} €</h3>
+    <br><br>
+    <h2> {{ 'Contacto'|trans({}, 'email', locale)}} </h2>
+    <br>
+    <p><b>{{ 'Nombre:'|trans({}, 'email', locale)}} </b> {{ presupuesto.nombre}}</p>
+    <br>
+    <p><b>{{ 'E-mail:'|trans({}, 'email', locale)}} </b> {{ presupuesto.email}}</p>
+    <br>
+    <p><b>{{ 'Teléfono:'|trans({}, 'email', locale)}} </b> {{ presupuesto.telefono}}</p>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Listado de usuarios</h1>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Idioma</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
+                <td>{{ usuario.locale }}</td>
+                <td>
+                    <a href="{{ path('admin_usuario_show', {'id': usuario.id}) }}">Ver</a>
+                    <a href="{{ path('admin_usuario_edit', {'id': usuario.id}) }}">Actualizar</a>
+                    {% if usuario.active %}
+                        <a href="{{ path('admin_usuario_desactive', {'id': usuario.id}) }}">Desactivar</a>
+                    {% else %}
+                        <a href="{{ path('admin_usuario_active', {'id': usuario.id}) }}">Activar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No hay usuarios registrados</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('admin_usuario_new') }}">Nuevo</a>
+    <a href="{{ path('index_administrador') }}">Volver</a>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Listado de Caracteristicas</h1>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Precio base</th>
+                <th>Tipo aplicación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for caracteristica in caracteristicas %}
+            <tr>
+                <td>{{ caracteristica.id }}</td>
+                <td>{{ caracteristica.nombre }}</td>
+                <td>{{ caracteristica.preciobase }}</td>
+                <td>{{ caracteristica.tipoAplicacion.nombre }}</td>
+                <td>
+                    <a href="{{ path('admin_caracteristica_show', {'id': caracteristica.id}) }}">Ver</a>
+                    <a href="{{ path('admin_caracteristica_edit', {'id': caracteristica.id}) }}">Editar</a>
+                    {% if caracteristica.activo %}
+                        <a href="{{ path('admin_caracteristica_desactive', {'id': caracteristica.id}) }}">Desactivar</a>
+                    {% else %}
+                        <a href="{{ path('admin_caracteristica_active', {'id': caracteristica.id}) }}">Activar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay caracteristicas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('admin_caracteristica_new') }}">Nueva</a>
+    <a href="{{ path('index_administrador') }}">Volver</a>
+{% endblock %}

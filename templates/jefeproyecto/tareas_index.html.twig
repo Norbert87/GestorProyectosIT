@@ -1,0 +1,61 @@
+{% extends 'jefeproyecto/base.html.twig' %}
+{% block option %}
+    <h3>Tareas</h3>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <br>
+    {% if proyecto.estado != 'terminado' %}
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary" href="{{ path('jefeproyecto_tarea_new',{'id':app.request.get('id')}) }}">Añadir Tarea</a>
+        </div>
+    </div>
+    {% endif %}
+    <br><br>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripcion</th>
+            <th>Técnico</th>
+            <th>Estado </th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tarea in proyecto.tareas %}
+            <tr>
+                <td>{{ tarea.id }}</td>
+                <td>{{ tarea.descripcionCorta }}</td>
+                {% if tarea.tecnico %}
+                    <td>{{ tarea.tecnico.email }}</td>
+                {% else %}
+                    <td>Sin asignar</td>
+                {% endif %}
+                <td>{{ tarea.estado }}</td>
+                <td>
+                    {#                    <a href="{{ path('proyecto_show', {'id': proyecto.id,'viewjefeproyecto': true}) }}">show</a>#}
+                    {#                    {% if workflow_can(proyecto, 'desarrollar') or workflow_can(proyecto, 'terminar') %}#}
+                    {#                        <a href="{{ path('jefeproyecto_tecnicos', {'id': proyecto.id}) }}">Técnicos</a>#}
+                    {#                        <a href="{{ path('jefeproyecto_tareas', {'id': proyecto.id}) }}">Tareas</a>#}
+                    {#                    {% endif %}#}
+                    {% if tarea.estado != 'terminada' %}
+                    <a href="{{ path('jefeproyecto_tarea_edit', {'id': app.request.get('id'),'idtarea':tarea.id}) }}">Editar</a>
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay tareas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('jefeproyecto_proyectos_index') }}">Volver</a>
+{% endblock %}

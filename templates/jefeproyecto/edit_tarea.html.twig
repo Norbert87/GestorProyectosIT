@@ -1,0 +1,12 @@
+{% extends 'jefeproyecto/base.html.twig' %}
+
+{% block title %}Editar Tarea{% endblock %}
+
+{% block option %}
+    <h4>Editar Tarea</h4>
+
+    {{ include('jefeproyecto/_form_tarea.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('jefeproyecto_tareas',{'id': app.request.get('id')}) }}">Volver</a>
+
+{% endblock %}

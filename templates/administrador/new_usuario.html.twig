@@ -1,0 +1,10 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Nuevo usuario</h1>
+
+    {{ include('administrador/_usuario_form.html.twig') }}
+
+    <a href="{{ path('admin_usuarios_index') }}">Volver</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Panel de técnico'|trans({}, 'tecnico') }}{% endblock %}
+
+{% block body %}
+    <div align="right"><a href="{{ path('app_logout') }}">Salir</a></div>
+    <div align="right"><a href="{{ path('tecnico_profile_edit') }}">Perfil</a></div>
+
+    <h1>{{ 'Panel de técnico'|trans({}, 'tecnico') }}</h1>
+
+    {% block option %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'tecnico/base.html.twig' %}
+
+{% block option %}
+    <h1>Proyecto</h1>
+
+    {%for message in	app.flashes('notice') %}
+        <div class="flash-notice"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ proyecto.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha entrega</th>
+                <td>{{ proyecto.presupuesto.fechaEntrega|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ proyecto.estado }}</td>
+            </tr>
+            <tr>
+                <th>Progreso</th>
+                <td>{{ progreso }}</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('tecnico_proyectos_index') }}">Volver</a>
+
+{% endblock %}

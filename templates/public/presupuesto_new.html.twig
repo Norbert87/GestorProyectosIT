@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Nuevo Presupuesto'|trans({}, 'public') }}{% endblock %}
+
+{% block body %}
+    {% set tipos = app.session.get('tiposaplicacion') %}
+    <h1>{{ 'Crear Presupuesto'|trans({}, 'public') }}</h1>
+
+    {{ include('public/_presupuesto_form.html.twig') }}
+
+{% endblock %}

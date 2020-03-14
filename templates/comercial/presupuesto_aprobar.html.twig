@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Presupuesto{% endblock %}
+
+{% block body %}
+    <h1>Edit Presupuesto</h1>
+
+    {{ include('comercial/_presupuesto_aprobar_form.html.twig', {'button_label': 'Aprobar'}) }}
+
+    <a href="{{ path('comercial_presupuesto_index') }}">Volver</a>
+
+{% endblock %}

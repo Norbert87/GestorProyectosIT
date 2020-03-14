@@ -1,0 +1,53 @@
+{% extends 'comercial/base.html.twig' %}
+
+{% block option %}
+{#    <div align="right"><a href="{{ path('app_logout') }}">Salir</a></div>#}
+    <h2>Presupuestos</h2>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>FechaSolicitud</th>
+                <th>FechaEntrega</th>
+                <th>Precio final</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for presupuesto in presupuestos %}
+            <tr>
+                <td>{{ presupuesto.id }}</td>
+                <td>{{ presupuesto.nombre }}</td>
+                <td>{{ presupuesto.fechaSolicitud ? presupuesto.fechaSolicitud|date('d-m-Y') : '' }}</td>
+                <td>{{ presupuesto.fechaEntrega ? presupuesto.fechaEntrega|date('d-m-Y') : '' }}</td>
+                <td>{{ presupuesto.preciofinal }}</td>
+                <td>{{ presupuesto.estado }}</td>
+                <td>
+                    <a href="{{ path('comercial_presupuesto_show', {'id': presupuesto.id}) }}">Mostrar</a>
+
+                    {% if presupuesto.estado == 'pendiente' %}
+                        <a href="{{ path('comercial_presupuesto_edit', {'id': presupuesto.id}) }}">Editar</a>
+                        <a href="{{ path('comercial_presupuesto_aprobar', {'id': presupuesto.id}) }}">Aprobar</a>
+                        <a href="{{ path('comercial_presupuesto_rechazar', {'id': presupuesto.id}) }}">Rechazar</a>
+                    {% endif %}
+                    {% if presupuesto.estado == 'aprobado' and presupuesto.proyecto %}
+                        <a href="{{ path('comercial_proyecto_show', {'id': presupuesto.proyecto.id}) }}">Ver proyecto</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">No hay presupuestos</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

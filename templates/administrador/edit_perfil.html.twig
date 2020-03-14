@@ -1,0 +1,10 @@
+{% extends 'administrador/base.html.twig' %}
+
+{% block option %}
+    <h1>Editar Perfil</h1>
+
+    {{ include('administrador/_usuario_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('index_administrador') }}">Volver</a>
+
+{% endblock %}

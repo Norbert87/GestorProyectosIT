@@ -1,0 +1,69 @@
+{% extends 'jefeproyecto/base.html.twig' %}
+{% block option %}
+    <h1>Proyectos</h1>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    {% if estado == 'aprobado' %}
+        <a>{{ 'Aprobados'|trans({}, 'jefeproyecto') }}</a>
+    {% else %}
+        <a href="{{ path('jefeproyecto_proyectos_index', {'estado': 'aprobado'}) }}">{{ 'Aprobados'|trans({}, 'jefeproyecto') }}</a>
+    {% endif %}
+
+    {% if estado == 'enproceso' %}
+        <a>{{ 'En Proceso'|trans({}, 'jefeproyecto') }}</a>
+    {% else %}
+        <a href="{{ path('jefeproyecto_proyectos_index', {'estado': 'enproceso'}) }}">{{ 'En Proceso'|trans({}, 'jefeproyecto') }}</a>
+    {% endif %}
+
+    {% if estado == 'terminado' %}
+        <a>{{ 'Terminados'|trans({}, 'jefeproyecto') }}</a>
+    {% else %}
+        <a href="{{ path('jefeproyecto_proyectos_index', {'estado': 'terminado'}) }}">{{ 'Terminados'|trans({}, 'jefeproyecto') }}</a>
+    {% endif %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+{#            <th>TokenPublico</th>#}
+            <th>Estado</th>
+            <th>Progreso</th>
+            <th>Acciones</th>
+{#            <th>Cambiar Estado</th>#}
+        </tr>
+        </thead>
+        <tbody>
+        {% for proyecto in proyectos %}
+            <tr>
+                <td>{{ proyecto.id }}</td>
+{#                <td>{{ proyecto.tokenPublico }}</td>#}
+                <td>{{ proyecto.estado }}</td>
+                <td>{{ progreso[proyecto.id] }}</td>
+                <td>
+                    <a href="{{ path('jefe_proyecto_show', {'id': proyecto.id}) }}">Ver/Cambiar Estado</a>
+                    <a href="{{ path('jefeproyecto_tecnicos', {'id': proyecto.id}) }}">Técnicos</a>
+                    {% if proyecto.tecnicos|length > 0 %}
+                    <a href="{{ path('jefeproyecto_tareas', {'id': proyecto.id}) }}">Tareas</a>
+                    {% endif %}
+
+{#                    <a href="{{ path('proyecto_edit', {'id': proyecto.id}) }}">edit</a>#}
+                </td>
+                <td>
+{#                    {% for transition in workflow_transitions(proyecto) %}#}
+{#                        <a href="{{ path('jefeproyecto_changestate_add', {'id': proyecto.id,'transicion':transition.name}) }}">{{ transition.name }}</a>#}
+{#                    {% else %}#}
+{#                        No hay acciones disponibles#}
+{#                    {% endfor %}#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay proyectos en esta sección</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

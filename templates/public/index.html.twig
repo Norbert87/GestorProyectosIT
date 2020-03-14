@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crea tu app{% endblock %}
+
+{% block body %}
+    <div align="right" top="0"><a href="{{ path('app_login') }}">Login</a></div>
+
+    <div align="center">
+        <h1>{{ 'Crea tu app!!!'|trans({}, 'public') }}</h1>
+        <h3>{{ 'Somos una empresa joven pero preparada que desarrollará tu aplicación rapidamente con un bajo coste.'|trans({}, 'public') }}</h3>
+    </div>
+    <p align="center"><b>-----------</b></p>
+    <div align="center">
+        <p><b>{{ 'Calcula tu presupuesto de forma gratuita y sin compromiso.'|trans({}, 'public') }}</b></p>
+        <a href="{{ path('presupuesto_step1_new') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">{{ 'Empezar'|trans({}, 'public') }}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'tecnico/base.html.twig' %}
+{% block option %}
+    <h1>Proyectos</h1>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Estado</th>
+            <th>Progreso</th>
+            <th>Tareas asignadas</th>
+            <th>Tareas asignadas completadas</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for proyecto in proyectos %}
+            <tr>
+                <td>{{ proyecto.id }}</td>
+                <td>{{ proyecto.estado }}</td>
+                <td>{{ progreso[proyecto.id] }}</td>
+                <td>{{ tareaasignada[proyecto.id] }}</td>
+                <td>{{ tareacompletada[proyecto.id] }}</td>
+                <td>
+                    <a href="{{ path('tecnico_proyecto_show', {'id': proyecto.id}) }}">Ver Proyecto</a>
+                    <a href="{{ path('tecnico_tareas', {'id': proyecto.id}) }}">Ver Tareas</a>
+
+
+                </td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay proyectos en esta sección</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

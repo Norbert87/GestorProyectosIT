@@ -1,0 +1,56 @@
+{% extends 'jefeproyecto/base.html.twig' %}
+{% block option %}
+    <h3>Técnicos</h3>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+{% if proyecto.estado !='terminado' %}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.tecnico) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.save) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endif %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Técnico</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tecnico in proyecto.tecnicos %}
+            <tr>
+                <td>{{ tecnico.id }}</td>
+                <td>{{ tecnico.email }}</td>
+                <td>
+{#                    <a href="{{ path('proyecto_show', {'id': proyecto.id,'viewjefeproyecto': true}) }}">show</a>#}
+{#                    {% if workflow_can(proyecto, 'desarrollar') or workflow_can(proyecto, 'terminar') %}#}
+{#                        <a href="{{ path('jefeproyecto_tecnicos', {'id': proyecto.id}) }}">Técnicos</a>#}
+{#                        <a href="{{ path('jefeproyecto_tareas', {'id': proyecto.id}) }}">Tareas</a>#}
+{#                    {% endif %}#}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay técnicos asociados</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('jefeproyecto_proyectos_index') }}">Volver</a>
+{% endblock %}

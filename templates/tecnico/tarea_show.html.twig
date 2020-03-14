@@ -1,0 +1,30 @@
+{% extends 'tecnico/base.html.twig' %}
+
+{% block option %}
+    <h1>Tarea</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tarea.id }}</td>
+            </tr>
+            <tr>
+                <th>DescripcionCorta</th>
+                <td>{{ tarea.descripcionCorta }}</td>
+            </tr>
+            <tr>
+                <th>DescripcionLarga</th>
+                <td>{{ tarea.descripcionLarga }}</td>
+            </tr>
+            <tr>
+                <th>Notas</th>
+                <td>{{ tarea.notas }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tecnico_tareas',{'id': app.request.get('id')}) }}">Volver</a>
+
+
+{% endblock %}

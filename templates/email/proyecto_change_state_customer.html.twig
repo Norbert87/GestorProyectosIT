@@ -1,0 +1,30 @@
+{% extends 'email/base.html.twig' %}
+{% block bodyemail %}
+    <h1>{{  'Proyecto ha cambiado de estado a '|trans({}, 'email', locale)}} {{  proyecto.estado|trans({}, 'email', locale)}}</h1>
+    <h5>{{ 'Caracteristicas del proyecto:'|trans({}, 'email', locale)}}</h5>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>{{ 'Id'|trans({}, 'email', locale)}}</th>
+            <td>{{ proyecto.id }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Fecha entrega'|trans({}, 'email', locale)}}</th>
+            <td>{{ proyecto.presupuesto.fechaEntrega|date('d-m-Y') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Total'|trans({}, 'email', locale)}}</th>
+            <td>{{ proyecto.presupuesto.preciofinal }} €</td>
+        </tr>
+        <tr>
+            <th>{{ 'Enlace publico'|trans({}, 'email', locale)}}</th>
+            <td>{{ host }}{{ path('public_proyecto_show',{'token': proyecto.tokenPublico,'_locale':locale}) }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Estado'|trans({}, 'email', locale)}}</th>
+            <td>{{ proyecto.estado }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+{% endblock %}

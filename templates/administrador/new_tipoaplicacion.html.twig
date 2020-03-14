@@ -1,0 +1,10 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Nuevo Tipo Aplicación</h1>
+
+    {{ include('administrador/_tipoaplicacion_form.html.twig') }}
+
+    <a href="{{ path('admin_tiposaplicacion_index') }}">Volver</a>
+{% endblock %}

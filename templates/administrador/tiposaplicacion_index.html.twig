@@ -1,0 +1,48 @@
+{% extends 'administrador/base.html.twig' %}
+
+
+{% block option %}
+    <h1>Tipo de Aplicacion</h1>
+    {%for message in	app.flashes('error') %}
+        <div class="flash-error"><div class="alert alert-danger">	{{message}}	</div></div>
+    {% endfor %}
+    {%for message in	app.flashes('ok') %}
+        <div class="flash-ok"><div class="alert alert-success">	{{message}}	</div></div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Precio Base</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipo_aplicacion in tipo_aplicacions %}
+            <tr>
+                <td>{{ tipo_aplicacion.id }}</td>
+                <td>{{ tipo_aplicacion.nombre }}</td>
+                <td>{{ tipo_aplicacion.preciobase }}</td>
+                <td>{{ tipo_aplicacion.activo ? 'Si' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('admin_tipoaplicacion_show', {'id': tipo_aplicacion.id}) }}">Ver</a>
+                    <a href="{{ path('admin_tipoaplicacion_edit', {'id': tipo_aplicacion.id}) }}">Editar</a>
+                    {% if tipo_aplicacion.activo %}
+                        <a href="{{ path('admin_tipoaplicacion_desactive', {'id': tipo_aplicacion.id}) }}">Desactivar</a>
+                    {% else %}
+                        <a href="{{ path('admin_tipoaplicacion_active', {'id': tipo_aplicacion.id}) }}">Activar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay tipos de aplicacion</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{{ path('admin_tipoaplicacion_new') }}">Nueva</a>
+    <a href="{{ path('index_administrador') }}">Volver</a>
+{% endblock %}
