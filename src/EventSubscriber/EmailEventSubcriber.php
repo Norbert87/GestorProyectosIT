@@ -8,7 +8,7 @@ use App\Event\TareaEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Services\EmailManager;
 use	Symfony\Component\Workflow\Event\Event as WorkflowEvent;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 
@@ -17,7 +17,7 @@ class EmailEventSubcriber implements EventSubscriberInterface
     private $emailService;
     private $objectManager;
 
-    public function __construct(EmailManager $emailService, ObjectManager $objectManager )
+    public function __construct(EmailManager $emailService, EntityManagerInterface $objectManager )
     {
         $this->emailService = $emailService;
         $this->objectManager = $objectManager;
